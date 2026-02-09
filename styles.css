@@ -490,9 +490,6 @@ body {
 /* Hide old message photo if carousel is used */
 .message-image-container {
     display: none;
-}
-
-.message-image-container {
     position: relative;
     animation: fadeInUp 1s ease-out 0.3s both;
 }
