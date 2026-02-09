@@ -963,6 +963,15 @@ body {
         bottom: -8px;
     }
     
+    .message-photo {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .message-content-wrapper {
+        gap: 1.2rem;
+    }
+    
     .main-title {
         margin-bottom: 0.8rem;
     }
@@ -1225,6 +1234,11 @@ body {
     
     .placeholder-text {
         font-size: 0.9rem;
+    }
+    
+    .message-photo {
+        width: 120px;
+        height: 120px;
     }
     
     .main-title {
