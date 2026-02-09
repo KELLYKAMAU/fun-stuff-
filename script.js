@@ -6,9 +6,17 @@
 const CONFIG = {
     herName: "Reemie Wambui",           // Replace with her name
     yourName: "Kelly Kamau",     // Replace with your name
-    personalMessage: "Hey wamboo ,it may seem odd but I do have a request?",  // Replace with your personal message
+    personalMessage: "Hey wamboo ,I know ur wondering but I do know u might have a pretty good guess,it may seem odd but I do have a request?",  // Replace with your personal message
     relationshipStartDate: "2024-01-01",  // Format: YYYY-MM-DD (when you started dating/met - optional)
-    enableLoveCounter: true  // Set to false to hide love counter
+    enableLoveCounter: true,  // Set to false to hide love counter
+    // Romantic background music - Sweet and colorful tune
+    // Beautiful romantic music - Replace with your own sweet & romantic tune!
+    // Recommended sources for free romantic music:
+    // - Pixabay Music: https://pixabay.com/music/search/romantic/
+    // - Bensound: https://www.bensound.com/royalty-free-music/romantic
+    // - YouTube Audio Library (download and host)
+    // - Or upload your own MP3 to a hosting service
+    musicUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"  // Replace with your romantic music URL
 };
 
 // DOM Elements
@@ -50,7 +58,21 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     setupSmoothScrolling();
     checkImageLoad();
+    setupMusic();
 });
+
+// ============================================
+// MUSIC SETUP
+// ============================================
+
+function setupMusic() {
+    const musicSource = document.getElementById('musicSource');
+    if (backgroundMusic && musicSource && CONFIG.musicUrl) {
+        musicSource.src = CONFIG.musicUrl;
+        backgroundMusic.load();
+        backgroundMusic.volume = 0.5; // Set to 50% volume for pleasant background music
+    }
+}
 
 // ============================================
 // IMAGE LOAD CHECK
