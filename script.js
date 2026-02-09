@@ -511,6 +511,7 @@ function playSuccessSound() {
 // ============================================
 
 let isMusicPlaying = false;
+const musicVisualizer = document.getElementById('musicVisualizer');
 
 function toggleMusic() {
     if (!backgroundMusic) return;
@@ -519,6 +520,10 @@ function toggleMusic() {
         backgroundMusic.pause();
         musicIcon.textContent = '🔇';
         musicToggle.classList.add('muted');
+        musicToggle.classList.remove('playing');
+        if (musicVisualizer) {
+            musicVisualizer.classList.remove('active');
+        }
         isMusicPlaying = false;
     } else {
         // Try to play music (may require user interaction first)
@@ -529,15 +534,44 @@ function toggleMusic() {
                 .then(() => {
                     musicIcon.textContent = '🎵';
                     musicToggle.classList.remove('muted');
+                    musicToggle.classList.add('playing');
+                    if (musicVisualizer) {
+                        musicVisualizer.classList.add('active');
+                    }
                     isMusicPlaying = true;
                 })
                 .catch(() => {
                     // Autoplay was prevented - user needs to interact first
                     musicIcon.textContent = '🔇';
+                    musicToggle.classList.add('muted');
+                    if (musicVisualizer) {
+                        musicVisualizer.classList.remove('active');
+                    }
                     console.log('Music autoplay prevented. User interaction required.');
                 });
         }
     }
+}
+
+// Update visualizer when music plays/pauses
+if (backgroundMusic) {
+    backgroundMusic.addEventListener('play', () => {
+        if (musicVisualizer) {
+            musicVisualizer.classList.add('active');
+        }
+        if (musicToggle) {
+            musicToggle.classList.add('playing');
+        }
+    });
+    
+    backgroundMusic.addEventListener('pause', () => {
+        if (musicVisualizer) {
+            musicVisualizer.classList.remove('active');
+        }
+        if (musicToggle) {
+            musicToggle.classList.remove('playing');
+        }
+    });
 }
 
 // ============================================
