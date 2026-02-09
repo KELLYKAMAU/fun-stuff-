@@ -672,6 +672,211 @@ document.addEventListener('visibilitychange', () => {
     }
 });
 
+// ============================================
+// LOVE COUNTER
+// ============================================
+
+function initializeLoveCounter() {
+    if (!CONFIG.enableLoveCounter || !CONFIG.relationshipStartDate) {
+        return;
+    }
+    
+    const loveCounterSection = document.getElementById('loveCounterSection');
+    if (!loveCounterSection) return;
+    
+    const startDate = new Date(CONFIG.relationshipStartDate);
+    const daysCounter = document.getElementById('daysCounter');
+    const hoursCounter = document.getElementById('hoursCounter');
+    const minutesCounter = document.getElementById('minutesCounter');
+    
+    if (!daysCounter || !hoursCounter || !minutesCounter) return;
+    
+    // Show the counter section
+    loveCounterSection.classList.remove('hidden');
+    loveCounterSection.style.display = 'flex';
+    
+    function updateCounter() {
+        const now = new Date();
+        const diff = now - startDate;
+        
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        
+        daysCounter.textContent = days;
+        hoursCounter.textContent = hours.toString().padStart(2, '0');
+        minutesCounter.textContent = minutes.toString().padStart(2, '0');
+    }
+    
+    updateCounter();
+    setInterval(updateCounter, 60000); // Update every minute
+}
+
+// ============================================
+// PHOTO CAROUSEL
+// ============================================
+
+let currentSlide = 0;
+const photos = document.querySelectorAll('.carousel-photo');
+const dots = document.querySelectorAll('.dot');
+
+function initializePhotoCarousel() {
+    const carouselPrev = document.getElementById('carouselPrev');
+    const carouselNext = document.getElementById('carouselNext');
+    
+    if (carouselPrev) {
+        carouselPrev.addEventListener('click', () => showSlide(currentSlide - 1));
+    }
+    
+    if (carouselNext) {
+        carouselNext.addEventListener('click', () => showSlide(currentSlide + 1));
+    }
+    
+    // Dot navigation
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => showSlide(index));
+    });
+    
+    // Auto-advance carousel
+    if (photos.length > 0) {
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 5000);
+    }
+}
+
+function showSlide(index) {
+    if (photos.length === 0) return;
+    
+    if (index >= photos.length) {
+        currentSlide = 0;
+    } else if (index < 0) {
+        currentSlide = photos.length - 1;
+    } else {
+        currentSlide = index;
+    }
+    
+    photos.forEach((photo, i) => {
+        photo.classList.toggle('active', i === currentSlide);
+    });
+    
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+    });
+}
+
+// ============================================
+// SHARE BUTTON
+// ============================================
+
+function setupShareButton() {
+    const shareButton = document.getElementById('shareButton');
+    if (!shareButton) return;
+    
+    shareButton.addEventListener('click', async () => {
+        const url = window.location.href;
+        const title = `Will You Be My Valentine? 💕`;
+        const text = `Check out this special Valentine's Day website! 💕`;
+        
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: title,
+                    text: text,
+                    url: url
+                });
+            } catch (err) {
+                console.log('Share cancelled');
+            }
+        } else {
+            // Fallback: Copy to clipboard
+            try {
+                await navigator.clipboard.writeText(url);
+                shareButton.innerHTML = '<span>✓</span>';
+                shareButton.style.background = 'linear-gradient(135deg, #4caf50, #45a049)';
+                setTimeout(() => {
+                    shareButton.innerHTML = '<span>🔗</span>';
+                    shareButton.style.background = '';
+                }, 2000);
+            } catch (err) {
+                // Fallback: Show URL in alert
+                alert(`Share this link: ${url}`);
+            }
+        }
+    });
+}
+
+// ============================================
+// INTERACTIVE HEARTS
+// ============================================
+
+function setupInteractiveHearts() {
+    // Make floating hearts clickable
+    const hearts = document.querySelectorAll('.heart');
+    
+    hearts.forEach(heart => {
+        heart.style.cursor = 'pointer';
+        heart.addEventListener('click', (e) => {
+            createHeartBurst(e.clientX, e.clientY);
+            
+            // Add reaction
+            const reactions = ['💕', '💖', '💗', '💝', '💓', '✨', '💫'];
+            const randomReaction = reactions[Math.floor(Math.random() * reactions.length)];
+            heart.textContent = randomReaction;
+            heart.style.animation = 'bounce 0.5s ease';
+            
+            setTimeout(() => {
+                heart.style.animation = '';
+            }, 500);
+        });
+    });
+}
+
+function createHeartBurst(x, y) {
+    const burstCount = 8;
+    
+    for (let i = 0; i < burstCount; i++) {
+        const heart = document.createElement('span');
+        heart.textContent = '💕';
+        heart.style.position = 'fixed';
+        heart.style.left = x + 'px';
+        heart.style.top = y + 'px';
+        heart.style.fontSize = '1.5rem';
+        heart.style.pointerEvents = 'none';
+        heart.style.zIndex = '9999';
+        
+        const angle = (Math.PI * 2 * i) / burstCount;
+        const distance = 100;
+        const endX = x + Math.cos(angle) * distance;
+        const endY = y + Math.sin(angle) * distance;
+        
+        heart.style.animation = `heartBurst 1s ease-out forwards`;
+        heart.style.setProperty('--end-x', endX + 'px');
+        heart.style.setProperty('--end-y', endY + 'px');
+        
+        document.body.appendChild(heart);
+        
+        setTimeout(() => {
+            heart.remove();
+        }, 1000);
+    }
+    
+    // Add burst animation
+    if (!document.getElementById('heartBurstStyle')) {
+        const style = document.createElement('style');
+        style.id = 'heartBurstStyle';
+        style.textContent = `
+            @keyframes heartBurst {
+                to {
+                    transform: translate(calc(var(--end-x) - 50%), calc(var(--end-y) - 50%)) scale(0);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
 console.log('💕 Valentine\'s Day Website Loaded! 💕');
 console.log('Don\'t forget to update the CONFIG object with your personal information!');
 
