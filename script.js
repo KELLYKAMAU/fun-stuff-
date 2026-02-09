@@ -6,7 +6,7 @@
 const CONFIG = {
     herName: "Reemie Wambui",           // Replace with her name
     yourName: "Kelly Kamau",     // Replace with your name
-    personalMessage: "Hey wamboo ,will u be my valentines date?"  // Replace with your personal message
+    personalMessage: "Hey wamboo ,it may seem odd but I do have a request?"  // Replace with your personal message
 };
 
 // DOM Elements
