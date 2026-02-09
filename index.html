@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? 💕</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Music (Optional) -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Main Container -->
+    <div class="container" id="mainContainer">
+        <!-- Landing Section -->
+        <section class="landing-section" id="landingSection">
+            <div class="hearts-background">
+                <span class="heart">💕</span>
+                <span class="heart">💖</span>
+                <span class="heart">💗</span>
+                <span class="heart">💝</span>
+                <span class="heart">💕</span>
+                <span class="heart">💖</span>
+                <span class="heart">💗</span>
+                <span class="heart">💝</span>
+            </div>
+            
+            <div class="content-wrapper">
+                <h1 class="main-title">Hello <span class="name-highlight" id="herName">Beautiful</span>! ✨</h1>
+                <p class="subtitle">I have something special to ask you...</p>
+            </div>
+            
+            <button class="scroll-button" id="scrollButton">
+                <span>💌</span>
+                <span>Scroll to see more</span>
+            </button>
+        </section>
+
+        <!-- Personal Message Section -->
+        <section class="message-section" id="messageSection">
+            <div class="message-card">
+                <div class="card-header">
+                    <span class="envelope-icon">💌</span>
+                    <h2>A Special Message</h2>
+                </div>
+                <div class="card-body">
+                    <p class="personal-message" id="personalMessage">
+                        [INSERT YOUR MESSAGE HERE]
+                    </p>
+                    <p class="signature">— <span id="yourName">Your Name</span> 💕</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question Section -->
+        <section class="question-section" id="questionSection">
+            <div class="question-wrapper">
+                <h2 class="question-title">Will you be my Valentine?</h2>
+                <div class="buttons-container">
+                    <button class="btn btn-yes" id="yesButton">
+                        <span>Yes</span>
+                        <span class="emoji">💕</span>
+                    </button>
+                    <button class="btn btn-no" id="noButton">
+                        <span>No</span>
+                        <span class="emoji">🙈</span>
+                    </button>
+                </div>
+                <p class="hint-text" id="hintText">💡 Hint: The "Yes" button is the right choice!</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Success Screen -->
+    <div class="success-screen" id="successScreen">
+        <div class="success-content">
+            <div class="celebration">
+                <span class="celebration-emoji">🎉</span>
+                <span class="celebration-emoji">💕</span>
+                <span class="celebration-emoji">🎊</span>
+                <span class="celebration-emoji">💖</span>
+                <span class="celebration-emoji">✨</span>
+            </div>
+            <h1 class="success-title">Yay! You said Yes! 🎉</h1>
+            <p class="success-message">I'm so excited to spend Valentine's Day with you!</p>
+            <p class="success-message">Looking forward to creating beautiful memories together 💕</p>
+            <div class="floating-hearts">
+                <span>💕</span>
+                <span>💖</span>
+                <span>💗</span>
+                <span>💝</span>
+                <span>💕</span>
+                <span>💖</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Toggle Button -->
+    <button class="music-toggle" id="musicToggle" title="Toggle Background Music">
+        <span id="musicIcon">🎵</span>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
