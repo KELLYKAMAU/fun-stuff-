@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 </head>
 <body>
     <!-- Background Music (Optional) -->
@@ -24,13 +26,21 @@
                 <span class="heart">💖</span>
                 <span class="heart">💗</span>
                 <span class="heart">💝</span>
+                <span class="heart">💓</span>
+                <span class="heart">🧸</span>
+                <span class="heart">🐻</span>
                 <span class="heart">💕</span>
                 <span class="heart">💖</span>
                 <span class="heart">💗</span>
                 <span class="heart">💝</span>
+                <span class="heart">💓</span>
             </div>
             
             <div class="content-wrapper">
+                <div class="photo-container">
+                    <img src="images/reemie.jpg" alt="Reemie" class="her-photo" id="herPhoto">
+                    <div class="photo-frame"></div>
+                </div>
                 <h1 class="main-title">Hello <span class="name-highlight" id="herName">Beautiful</span>! ✨</h1>
                 <p class="subtitle">I have something special to ask you...</p>
             </div>
@@ -57,9 +67,52 @@
             </div>
         </section>
 
-        <!-- Question Section -->
-        <section class="question-section" id="questionSection">
+        <!-- Question 1: Do you like me? -->
+        <section class="question-section" id="question1Section">
             <div class="question-wrapper">
+                <div class="reaction-emoji" id="reaction1">😊</div>
+                <h2 class="question-title">Do you like me?</h2>
+                <div class="buttons-container">
+                    <button class="btn btn-yes" id="yesButton1">
+                        <span>Yes</span>
+                        <span class="emoji">😍</span>
+                    </button>
+                    <button class="btn btn-no" id="noButton1">
+                        <span>No</span>
+                        <span class="emoji">😢</span>
+                    </button>
+                </div>
+                <p class="secret-answer hidden" id="secretAnswer1">I knew it! 💕</p>
+            </div>
+        </section>
+
+        <!-- Question 2: How much do you love me? -->
+        <section class="question-section hidden" id="question2Section">
+            <div class="question-wrapper">
+                <div class="reaction-emoji" id="reaction2">💖</div>
+                <h2 class="question-title">How much do you love me?</h2>
+                <div class="love-meter-container">
+                    <div class="love-meter">
+                        <div class="love-meter-fill" id="loveMeterFill"></div>
+                        <div class="love-meter-text" id="loveMeterText">0%</div>
+                    </div>
+                    <div class="meter-buttons">
+                        <button class="btn btn-meter" id="meterButton1">A little 💕</button>
+                        <button class="btn btn-meter" id="meterButton2">A lot 💖</button>
+                        <button class="btn btn-meter" id="meterButton3">So much! 💗</button>
+                        <button class="btn btn-meter" id="meterButton4">Infinity! ♾️</button>
+                    </div>
+                </div>
+                <button class="btn btn-continue hidden" id="continueButton">
+                    Continue to the final question →
+                </button>
+            </div>
+        </section>
+
+        <!-- Question 3: Will you be my Valentine? -->
+        <section class="question-section hidden" id="question3Section">
+            <div class="question-wrapper">
+                <div class="reaction-emoji" id="reaction3">💝</div>
                 <h2 class="question-title">Will you be my Valentine?</h2>
                 <div class="buttons-container">
                     <button class="btn btn-yes" id="yesButton">

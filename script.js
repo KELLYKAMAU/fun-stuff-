@@ -15,11 +15,32 @@ const yesButton = document.getElementById('yesButton');
 const noButton = document.getElementById('noButton');
 const successScreen = document.getElementById('successScreen');
 const messageSection = document.getElementById('messageSection');
-const questionSection = document.getElementById('questionSection');
+const question1Section = document.getElementById('question1Section');
+const question2Section = document.getElementById('question2Section');
+const question3Section = document.getElementById('question3Section');
 const musicToggle = document.getElementById('musicToggle');
 const backgroundMusic = document.getElementById('backgroundMusic');
 const musicIcon = document.getElementById('musicIcon');
 const hintText = document.getElementById('hintText');
+
+// Question 1 elements
+const yesButton1 = document.getElementById('yesButton1');
+const noButton1 = document.getElementById('noButton1');
+const secretAnswer1 = document.getElementById('secretAnswer1');
+const reaction1 = document.getElementById('reaction1');
+
+// Question 2 elements
+const loveMeterFill = document.getElementById('loveMeterFill');
+const loveMeterText = document.getElementById('loveMeterText');
+const meterButton1 = document.getElementById('meterButton1');
+const meterButton2 = document.getElementById('meterButton2');
+const meterButton3 = document.getElementById('meterButton3');
+const meterButton4 = document.getElementById('meterButton4');
+const continueButton = document.getElementById('continueButton');
+const reaction2 = document.getElementById('reaction2');
+
+// Question 3 elements
+const reaction3 = document.getElementById('reaction3');
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -64,7 +85,24 @@ function setupEventListeners() {
         });
     }
     
-    // Yes button
+    // Question 1 buttons
+    if (yesButton1) {
+        yesButton1.addEventListener('click', () => handleQuestion1Yes());
+    }
+    if (noButton1) {
+        noButton1.addEventListener('click', () => handleQuestion1No());
+    }
+    
+    // Question 2 - Love meter buttons
+    if (meterButton1) meterButton1.addEventListener('click', () => updateLoveMeter(25));
+    if (meterButton2) meterButton2.addEventListener('click', () => updateLoveMeter(50));
+    if (meterButton3) meterButton3.addEventListener('click', () => updateLoveMeter(100));
+    if (meterButton4) meterButton4.addEventListener('click', () => updateLoveMeter(200));
+    if (continueButton) {
+        continueButton.addEventListener('click', () => showQuestion3());
+    }
+    
+    // Question 3 buttons
     if (yesButton) {
         yesButton.addEventListener('click', handleYesClick);
     }
@@ -82,16 +120,141 @@ function setupEventListeners() {
     
     // Keyboard support
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'y' || e.key === 'Y') {
-            handleYesClick();
-        } else if (e.key === 'n' || e.key === 'N') {
-            handleNoClick();
+        if (currentQuestion === 3) {
+            if (e.key === 'y' || e.key === 'Y') {
+                handleYesClick();
+            } else if (e.key === 'n' || e.key === 'N') {
+                handleNoClick();
+            }
         }
     });
 }
 
 // ============================================
 // YES BUTTON HANDLER
+// ============================================
+
+// ============================================
+// QUESTION 1 HANDLERS
+// ============================================
+
+function handleQuestion1Yes() {
+    reaction1.textContent = '😍';
+    reaction1.style.animation = 'bounce 0.5s ease';
+    secretAnswer1.classList.remove('hidden');
+    secretAnswer1.style.animation = 'fadeInUp 0.5s ease';
+    
+    // Small confetti burst
+    if (typeof confetti !== 'undefined') {
+        confetti({
+            particleCount: 30,
+            spread: 60,
+            origin: { y: 0.6 },
+            colors: ['#ff6b9d', '#ff1493', '#ffb3d9']
+        });
+    }
+    
+    setTimeout(() => {
+        question1Section.classList.add('hidden');
+        showQuestion2();
+    }, 2000);
+}
+
+function handleQuestion1No() {
+    reaction1.textContent = '😢';
+    reaction1.style.animation = 'shake 0.5s ease';
+    
+    // Show secret answer anyway (playful)
+    setTimeout(() => {
+        reaction1.textContent = '😊';
+        secretAnswer1.textContent = "I know you're just being shy! 💕";
+        secretAnswer1.classList.remove('hidden');
+        secretAnswer1.style.animation = 'fadeInUp 0.5s ease';
+        
+        setTimeout(() => {
+            question1Section.classList.add('hidden');
+            showQuestion2();
+        }, 2000);
+    }, 1000);
+}
+
+function showQuestion2() {
+    question2Section.classList.remove('hidden');
+    question2Section.style.display = 'flex';
+    question2Section.style.opacity = '1';
+    question2Section.style.transform = 'translateY(0)';
+    question2Section.scrollIntoView({ behavior: 'smooth' });
+    if (reaction2) {
+        reaction2.style.animation = 'pulse 1s ease infinite';
+    }
+}
+
+// ============================================
+// QUESTION 2 - LOVE METER
+// ============================================
+
+function updateLoveMeter(value) {
+    loveMeterValue = Math.max(loveMeterValue, value);
+    
+    // Update meter visual
+    if (loveMeterFill) {
+        const percentage = Math.min(loveMeterValue, 200);
+        loveMeterFill.style.width = `${percentage}%`;
+        
+        // Change color based on value
+        if (percentage >= 200) {
+            loveMeterFill.style.background = 'linear-gradient(90deg, #ff6b9d, #ff1493, #ff1744, #ff6b9d)';
+            loveMeterFill.style.backgroundSize = '200% 100%';
+            loveMeterFill.style.animation = 'gradientShift 2s ease infinite';
+        } else if (percentage >= 100) {
+            loveMeterFill.style.background = 'linear-gradient(90deg, #ff6b9d, #ff1493)';
+        } else {
+            loveMeterFill.style.background = 'linear-gradient(90deg, #ffb3d9, #ff6b9d)';
+        }
+    }
+    
+    // Update text
+    if (loveMeterText) {
+        if (loveMeterValue >= 200) {
+            loveMeterText.textContent = '∞% (Infinity!)';
+            loveMeterText.style.fontSize = '1.5rem';
+        } else {
+            loveMeterText.textContent = `${loveMeterValue}%`;
+        }
+    }
+    
+    // Show continue button when meter is high enough
+    if (loveMeterValue >= 50 && continueButton) {
+        continueButton.classList.remove('hidden');
+        continueButton.style.animation = 'fadeInUp 0.5s ease';
+    }
+    
+    // Confetti burst for high values
+    if (loveMeterValue >= 100 && typeof confetti !== 'undefined') {
+        confetti({
+            particleCount: 20,
+            spread: 40,
+            origin: { y: 0.5 },
+            colors: ['#ff6b9d', '#ff1493']
+        });
+    }
+}
+
+function showQuestion3() {
+    question2Section.classList.add('hidden');
+    question3Section.classList.remove('hidden');
+    question3Section.style.display = 'flex';
+    question3Section.style.opacity = '1';
+    question3Section.style.transform = 'translateY(0)';
+    question3Section.scrollIntoView({ behavior: 'smooth' });
+    currentQuestion = 3;
+    if (reaction3) {
+        reaction3.style.animation = 'pulse 1s ease infinite';
+    }
+}
+
+// ============================================
+// QUESTION 3 - FINAL YES/NO
 // ============================================
 
 function handleYesClick() {
@@ -105,8 +268,8 @@ function handleYesClick() {
     if (successScreen) {
         successScreen.classList.add('show');
         
-        // Add confetti effect
-        createConfetti();
+        // Enhanced confetti celebration
+        createEnhancedConfetti();
         
         // Play success sound (optional - you can add a sound file)
         playSuccessSound();
@@ -123,13 +286,19 @@ function handleYesClick() {
 // ============================================
 
 let noClickCount = 0;
+let currentQuestion = 1;
+let loveMeterValue = 0;
 const noMessages = [
     "Are you sure? 😊",
     "Maybe think about it? 💭",
     "Pretty please? 🥺",
+    "Pookie please? 🥺",
+    "I'm gonna cry... 😭",
     "Just one more chance? 💕",
     "I won't give up! 💪",
-    "You know you want to say yes! 😉"
+    "You know you want to say yes! 😉",
+    "Please don't do this to me! 😢",
+    "My heart is breaking... 💔"
 ];
 
 function handleNoHover() {
@@ -158,14 +327,26 @@ function handleNoClick() {
         }
     }
     
-    // Make button smaller each time
-    const currentScale = 1 - (noClickCount * 0.1);
-    noButton.style.transform = `scale(${Math.max(0.5, currentScale)})`;
+    // Make No button smaller AND Yes button bigger
+    const noScale = Math.max(0.3, 1 - (noClickCount * 0.1));
+    const yesScale = Math.min(1.5, 1 + (noClickCount * 0.1));
+    
+    noButton.style.transform = `scale(${noScale})`;
+    yesButton.style.transform = `scale(${yesScale})`;
+    yesButton.style.transition = 'all 0.3s ease';
+    
+    // Update reaction emoji
+    if (reaction3) {
+        const reactions = ['😢', '😭', '🥺', '💔', '😰'];
+        reaction3.textContent = reactions[Math.min(noClickCount - 1, reactions.length - 1)];
+        reaction3.style.animation = 'shake 0.5s';
+    }
     
     // Shake animation
     noButton.style.animation = 'shake 0.5s';
     setTimeout(() => {
         noButton.style.animation = '';
+        if (reaction3) reaction3.style.animation = '';
     }, 500);
     
     // After several clicks, make it easier
@@ -176,7 +357,7 @@ function handleNoClick() {
     }
     
     // After many clicks, auto-click yes (playful)
-    if (noClickCount >= 10) {
+    if (noClickCount >= 8) {
         setTimeout(() => {
             handleYesClick();
         }, 1000);
@@ -197,6 +378,52 @@ document.head.appendChild(style);
 // ============================================
 // SUCCESS SCREEN EFFECTS
 // ============================================
+
+function createEnhancedConfetti() {
+    // Use canvas-confetti library for amazing effects
+    if (typeof confetti !== 'undefined') {
+        // Multiple bursts for celebration
+        const duration = 3000;
+        const end = Date.now() + duration;
+        
+        const interval = setInterval(() => {
+            if (Date.now() > end) {
+                clearInterval(interval);
+                return;
+            }
+            
+            // Heart-shaped confetti
+            confetti({
+                particleCount: 50,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 },
+                colors: ['#ff6b9d', '#ff1493', '#ff1744', '#ffb3d9', '#ffffff']
+            });
+            
+            confetti({
+                particleCount: 50,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 },
+                colors: ['#ff6b9d', '#ff1493', '#ff1744', '#ffb3d9', '#ffffff']
+            });
+        }, 200);
+        
+        // Final big burst
+        setTimeout(() => {
+            confetti({
+                particleCount: 200,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff6b9d', '#ff1493', '#ff1744', '#ffb3d9', '#ffffff']
+            });
+        }, 500);
+    } else {
+        // Fallback to original confetti if library not loaded
+        createConfetti();
+    }
+}
 
 function createConfetti() {
     const colors = ['#ff6b9d', '#ff1493', '#ff1744', '#ffb3d9', '#ffffff'];
@@ -301,8 +528,8 @@ function setupSmoothScrolling() {
     }, observerOptions);
     
     // Observe sections
-    [messageSection, questionSection].forEach(section => {
-        if (section) {
+    [messageSection, question1Section, question2Section, question3Section].forEach(section => {
+        if (section && section.style.display !== 'none') {
             section.style.opacity = '0';
             section.style.transform = 'translateY(30px)';
             section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';

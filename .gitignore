@@ -2,6 +2,10 @@
 node_modules/
 .pnpm-store/
 
+# Images (keep the images folder but ignore if needed)
+# images/*.jpg
+# images/*.png
+
 # Build outputs
 dist/
 build/
