@@ -258,6 +258,214 @@ body {
 }
 
 /* ============================================
+   LOVE COUNTER SECTION
+   ============================================ */
+
+.love-counter-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background: linear-gradient(180deg, #ffe6f0 0%, #e9d5ff 50%, #ffb3d9 100%);
+}
+
+.love-counter-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    padding: 3rem;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 15px 50px var(--shadow);
+    text-align: center;
+    animation: fadeInUp 1s ease-out;
+    border: 3px solid rgba(199, 125, 255, 0.3);
+}
+
+.counter-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--deep-pink);
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px var(--shadow);
+}
+
+.counter-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.counter-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.counter-number {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--purple-accent), var(--primary-pink), var(--deep-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    animation: numberPulse 2s ease-in-out infinite;
+}
+
+.counter-item:nth-child(1) .counter-number { animation-delay: 0s; }
+.counter-item:nth-child(3) .counter-number { animation-delay: 0.3s; }
+.counter-item:nth-child(5) .counter-number { animation-delay: 0.6s; }
+
+@keyframes numberPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.counter-label {
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    color: var(--deep-pink);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.counter-separator {
+    font-size: 2.5rem;
+    color: var(--purple-accent);
+    font-weight: 700;
+    animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.counter-message {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--deep-pink);
+    margin-top: 1.5rem;
+    font-weight: 600;
+}
+
+/* ============================================
+   PHOTO CAROUSEL
+   ============================================ */
+
+.photo-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 50px var(--shadow);
+}
+
+.carousel-photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    border-radius: 20px;
+}
+
+.carousel-photo.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 2rem;
+    color: var(--deep-pink);
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background: var(--white);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-prev {
+    left: 1rem;
+}
+
+.carousel-next {
+    right: 1rem;
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    z-index: 10;
+    position: relative;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid var(--white);
+}
+
+.dot.active {
+    background: var(--deep-pink);
+    transform: scale(1.2);
+    box-shadow: 0 0 10px var(--deep-pink);
+}
+
+.dot:hover {
+    background: var(--primary-pink);
+    transform: scale(1.1);
+}
+
+/* ============================================
    MESSAGE SECTION
    ============================================ */
 
@@ -277,6 +485,11 @@ body {
     gap: 2rem;
     max-width: 1200px;
     width: 100%;
+}
+
+/* Hide old message photo if carousel is used */
+.message-image-container {
+    display: none;
 }
 
 .message-image-container {
@@ -1066,6 +1279,39 @@ body {
 
 .music-visualizer.active .music-bar {
     animation: musicWave 1.2s ease-in-out infinite;
+}
+
+/* ============================================
+   SHARE BUTTON
+   ============================================ */
+
+.share-button {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple-accent), var(--primary-pink));
+    border: 3px solid var(--white);
+    color: var(--white);
+    font-size: 1.8rem;
+    cursor: pointer;
+    box-shadow: 0 6px 25px rgba(199, 125, 255, 0.4), 0 0 0 4px rgba(199, 125, 255, 0.2);
+    transition: all 0.3s ease;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.share-button:hover {
+    transform: scale(1.15) rotate(-5deg);
+    box-shadow: 0 8px 30px rgba(199, 125, 255, 0.6), 0 0 0 6px rgba(199, 125, 255, 0.3);
+}
+
+.share-button:active {
+    transform: scale(1.05);
 }
 
 /* ============================================

@@ -6,7 +6,9 @@
 const CONFIG = {
     herName: "Reemie Wambui",           // Replace with her name
     yourName: "Kelly Kamau",     // Replace with your name
-    personalMessage: "Hey wamboo ,it may seem odd but I do have a request?"  // Replace with your personal message
+    personalMessage: "Hey wamboo ,it may seem odd but I do have a request?",  // Replace with your personal message
+    relationshipStartDate: "2024-01-01",  // Format: YYYY-MM-DD (when you started dating/met - optional)
+    enableLoveCounter: true  // Set to false to hide love counter
 };
 
 // DOM Elements

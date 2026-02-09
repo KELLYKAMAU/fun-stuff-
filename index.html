@@ -71,12 +71,45 @@
             </button>
         </section>
 
+        <!-- Love Counter Section -->
+        <section class="love-counter-section hidden" id="loveCounterSection">
+            <div class="love-counter-card">
+                <h2 class="counter-title">Our Time Together 💕</h2>
+                <div class="counter-display" id="loveCounter">
+                    <div class="counter-item">
+                        <span class="counter-number" id="daysCounter">0</span>
+                        <span class="counter-label">Days</span>
+                    </div>
+                    <div class="counter-separator">:</div>
+                    <div class="counter-item">
+                        <span class="counter-number" id="hoursCounter">0</span>
+                        <span class="counter-label">Hours</span>
+                    </div>
+                    <div class="counter-separator">:</div>
+                    <div class="counter-item">
+                        <span class="counter-number" id="minutesCounter">0</span>
+                        <span class="counter-label">Minutes</span>
+                    </div>
+                </div>
+                <p class="counter-message">Every moment with you is special ✨</p>
+            </div>
+        </section>
+
         <!-- Personal Message Section -->
         <section class="message-section" id="messageSection">
             <div class="message-content-wrapper">
-                <div class="message-image-container">
-                    <img src="images/image.png" alt="Special Memory" class="message-photo">
-                    <div class="message-photo-frame"></div>
+                <!-- Photo Carousel -->
+                <div class="photo-carousel" id="photoCarousel">
+                    <div class="carousel-container">
+                        <img src="images/image.png" alt="Memory 1" class="carousel-photo active">
+                        <img src="images/reemie.jpg" alt="Memory 2" class="carousel-photo">
+                    </div>
+                    <button class="carousel-btn carousel-prev" id="carouselPrev">‹</button>
+                    <button class="carousel-btn carousel-next" id="carouselNext">›</button>
+                    <div class="carousel-dots">
+                        <span class="dot active" data-slide="0"></span>
+                        <span class="dot" data-slide="1"></span>
+                    </div>
                 </div>
                 <div class="message-card">
                     <div class="card-header">
@@ -234,6 +267,11 @@
     <!-- Music Toggle Button -->
     <button class="music-toggle" id="musicToggle" title="Toggle Background Music">
         <span id="musicIcon">🎵</span>
+    </button>
+
+    <!-- Share Button -->
+    <button class="share-button" id="shareButton" title="Share this page">
+        <span>🔗</span>
     </button>
 
     <script src="script.js"></script>
