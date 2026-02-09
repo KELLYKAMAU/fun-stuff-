@@ -1490,11 +1490,22 @@ body {
     }
     
     .music-toggle {
-        width: 45px;
-        height: 45px;
+        width: 55px;
+        height: 55px;
         bottom: 0.8rem;
         right: 0.8rem;
-        font-size: 1.1rem;
+        font-size: 1.3rem;
+    }
+    
+    .music-visualizer {
+        bottom: 0.8rem;
+        right: 4.5rem;
+        height: 35px;
+        gap: 3px;
+    }
+    
+    .music-bar {
+        width: 4px;
     }
     
     .scroll-button {
