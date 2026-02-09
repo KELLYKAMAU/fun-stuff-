@@ -1109,6 +1109,37 @@ body {
         font-size: clamp(2rem, 5vw, 3rem);
     }
     
+    .success-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .success-card {
+        padding: 1.5rem;
+    }
+    
+    .success-message-main {
+        font-size: 1rem;
+    }
+    
+    .promises-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .promise-item {
+        padding: 1.2rem;
+    }
+    
+    .promises-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .closing-message {
+        padding: 1.5rem;
+        margin-top: 2rem;
+    }
+    
     .success-message {
         font-size: 1.1rem;
     }
@@ -1299,7 +1330,59 @@ body {
     
     .success-title {
         font-size: clamp(1.8rem, 7vw, 2.5rem);
+        margin-bottom: 0.5rem;
+    }
+    
+    .success-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .success-card {
+        padding: 1.2rem;
+        margin: 1.5rem 0;
+    }
+    
+    .success-message-main {
+        font-size: 0.95rem;
+    }
+    
+    .promises-section {
+        margin: 2rem 0;
+    }
+    
+    .promises-title {
+        font-size: 1.5rem;
         margin-bottom: 1rem;
+    }
+    
+    .promise-item {
+        padding: 1rem;
+    }
+    
+    .promise-icon {
+        font-size: 2rem;
+    }
+    
+    .promise-text {
+        font-size: 0.9rem;
+    }
+    
+    .closing-message {
+        padding: 1.2rem;
+        margin-top: 1.5rem;
+    }
+    
+    .closing-text {
+        font-size: 1rem;
+    }
+    
+    .closing-text-sub {
+        font-size: 0.9rem;
+    }
+    
+    .signature-success {
+        font-size: 1.3rem;
     }
     
     .success-message {
