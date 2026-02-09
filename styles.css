@@ -735,24 +735,52 @@ body {
    RESPONSIVE DESIGN
    ============================================ */
 
+/* ============================================
+   RESPONSIVE DESIGN - ALL DEVICES
+   ============================================ */
+
+/* Large Tablets and Small Desktops (1024px and below) */
+@media (max-width: 1024px) {
+    .message-card {
+        max-width: 550px;
+        padding: 2.5rem;
+    }
+    
+    .question-wrapper {
+        max-width: 550px;
+    }
+    
+    .her-photo {
+        width: 220px;
+        height: 220px;
+    }
+}
+
+/* Tablets (768px and below) */
 @media (max-width: 768px) {
     .message-card {
         padding: 2rem 1.5rem;
+        max-width: 500px;
     }
     
     .buttons-container {
         flex-direction: column;
         align-items: center;
+        gap: 1.5rem;
     }
     
     .btn {
         width: 100%;
         max-width: 300px;
+        min-height: 56px; /* Touch-friendly */
         justify-content: center;
+        padding: 1.2rem 2rem;
+        font-size: 1.3rem;
     }
     
     .personal-message {
         font-size: 1rem;
+        line-height: 1.7;
     }
     
     .music-toggle {
@@ -760,10 +788,18 @@ body {
         height: 50px;
         bottom: 1rem;
         right: 1rem;
+        font-size: 1.2rem;
     }
     
     .meter-buttons {
         grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .btn-meter {
+        min-height: 50px;
+        font-size: 1rem;
+        padding: 0.9rem 1.2rem;
     }
     
     .reaction-emoji {
@@ -781,30 +817,368 @@ body {
     .her-photo {
         width: 200px;
         height: 200px;
+        border-width: 6px;
     }
     
     .content-wrapper {
         gap: 1.5rem;
     }
+    
+    .question-title {
+        font-size: clamp(2rem, 5vw, 3rem);
+        margin-bottom: 2rem;
+    }
+    
+    .main-title {
+        font-size: clamp(2.5rem, 7vw, 4rem);
+    }
+    
+    .success-title {
+        font-size: clamp(2rem, 5vw, 3rem);
+    }
+    
+    .success-message {
+        font-size: 1.1rem;
+    }
+    
+    .celebration-emoji {
+        font-size: 2.5rem;
+    }
+    
+    .card-header h2 {
+        font-size: 2rem;
+    }
+    
+    .btn-continue {
+        width: 100%;
+        max-width: 300px;
+        min-height: 56px;
+        font-size: 1.1rem;
+        padding: 1rem 2rem;
+    }
 }
 
+/* Small Tablets and Large Phones (600px and below) */
+@media (max-width: 600px) {
+    .landing-section,
+    .message-section,
+    .question-section {
+        padding: 1.5rem;
+    }
+    
+    .message-card {
+        padding: 1.5rem 1.2rem;
+    }
+    
+    .her-photo {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .photo-frame {
+        top: -8px;
+        left: -8px;
+        right: -8px;
+        bottom: -8px;
+    }
+    
+    .main-title {
+        margin-bottom: 0.8rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .scroll-button {
+        padding: 0.9rem 1.8rem;
+        font-size: 1rem;
+        margin-top: 2rem;
+    }
+    
+    .love-meter-container {
+        margin: 1.5rem 0;
+    }
+    
+    .question-wrapper {
+        max-width: 100%;
+    }
+}
+
+/* Mobile Phones (480px and below) */
 @media (max-width: 480px) {
     .landing-section,
     .message-section,
     .question-section {
         padding: 1rem;
+        min-height: 100vh;
     }
     
     .main-title {
-        font-size: 2rem;
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+        margin-bottom: 0.5rem;
     }
     
     .question-title {
-        font-size: 2rem;
+        font-size: clamp(1.8rem, 7vw, 2.2rem);
+        margin-bottom: 1.5rem;
     }
     
     .message-card {
         padding: 1.5rem 1rem;
+        border-radius: 15px;
+    }
+    
+    .card-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .envelope-icon {
+        font-size: 2.5rem;
+    }
+    
+    .personal-message {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .signature {
+        font-size: 1.2rem;
+    }
+    
+    .her-photo {
+        width: 160px;
+        height: 160px;
+        border-width: 5px;
+    }
+    
+    .content-wrapper {
+        gap: 1rem;
+    }
+    
+    .btn {
+        padding: 1rem 1.5rem;
+        font-size: 1.2rem;
+        max-width: 280px;
+    }
+    
+    .btn-meter {
+        padding: 0.8rem 1rem;
+        font-size: 0.95rem;
+    }
+    
+    .reaction-emoji {
+        font-size: 2.5rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .love-meter {
+        height: 45px;
+    }
+    
+    .love-meter-text {
+        font-size: 1rem;
+    }
+    
+    .hint-text {
+        font-size: 0.85rem;
+        margin-top: 0.8rem;
+    }
+    
+    .secret-answer {
+        font-size: 1.5rem;
+        margin-top: 1rem;
+    }
+    
+    .success-content {
+        padding: 1.5rem;
+    }
+    
+    .success-title {
+        font-size: clamp(1.8rem, 7vw, 2.5rem);
+        margin-bottom: 1rem;
+    }
+    
+    .success-message {
+        font-size: 1rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .celebration-emoji {
+        font-size: 2rem;
+    }
+    
+    .celebration {
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .btn-continue {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        margin-top: 1.5rem;
+    }
+    
+    .music-toggle {
+        width: 45px;
+        height: 45px;
+        bottom: 0.8rem;
+        right: 0.8rem;
+        font-size: 1.1rem;
+    }
+    
+    .scroll-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* Small Mobile Phones (360px and below) */
+@media (max-width: 360px) {
+    .landing-section,
+    .message-section,
+    .question-section {
+        padding: 0.8rem;
+    }
+    
+    .main-title {
+        font-size: 1.6rem;
+    }
+    
+    .question-title {
+        font-size: 1.6rem;
+    }
+    
+    .her-photo {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .message-card {
+        padding: 1.2rem 0.8rem;
+    }
+    
+    .btn {
+        padding: 0.9rem 1.2rem;
+        font-size: 1.1rem;
+        max-width: 260px;
+    }
+    
+    .btn-meter {
+        padding: 0.7rem 0.9rem;
+        font-size: 0.9rem;
+    }
+    
+    .reaction-emoji {
+        font-size: 2rem;
+    }
+    
+    .love-meter {
+        height: 40px;
+    }
+    
+    .love-meter-text {
+        font-size: 0.9rem;
+    }
+}
+
+/* Landscape Orientation for Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .landing-section,
+    .message-section,
+    .question-section {
+        min-height: auto;
+        padding: 1rem;
+    }
+    
+    .her-photo {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .main-title {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .question-title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+    
+    .content-wrapper {
+        gap: 0.8rem;
+    }
+    
+    .scroll-button {
+        margin-top: 1rem;
+        padding: 0.7rem 1.2rem;
+    }
+    
+    .reaction-emoji {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .love-meter {
+        height: 40px;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .btn {
+        min-height: 56px; /* Minimum touch target size */
+    }
+    
+    .btn-meter {
+        min-height: 48px;
+    }
+    
+    .btn-continue {
+        min-height: 56px;
+    }
+    
+    .music-toggle {
+        min-width: 48px;
+        min-height: 48px;
+    }
+    
+    /* Remove hover effects on touch devices */
+    .btn:hover {
+        transform: none;
+    }
+    
+    .btn:active {
+        transform: scale(0.95);
+    }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .her-photo {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .hearts-background,
+    .music-toggle,
+    .scroll-button {
+        display: none;
+    }
+    
+    body {
+        background: white;
+    }
+    
+    .landing-section,
+    .message-section,
+    .question-section {
+        min-height: auto;
+        page-break-inside: avoid;
     }
 }
 
