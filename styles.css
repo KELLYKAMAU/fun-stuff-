@@ -121,6 +121,35 @@ body {
     animation: framePulse 3s ease-in-out infinite;
 }
 
+.photo-placeholder {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--light-pink), var(--primary-pink));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 8px solid var(--white);
+    box-shadow: 0 10px 40px var(--shadow), 0 0 0 4px var(--light-pink);
+    position: relative;
+    z-index: 2;
+}
+
+.placeholder-emoji {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.placeholder-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: var(--white);
+    font-weight: 600;
+    text-shadow: 2px 2px 4px var(--shadow);
+}
+
 @keyframes photoFadeIn {
     from {
         opacity: 0;
@@ -946,10 +975,22 @@ body {
         font-size: 1.2rem;
     }
     
-    .her-photo {
+    .her-photo,
+    .photo-placeholder {
         width: 160px;
         height: 160px;
+    }
+    
+    .her-photo {
         border-width: 5px;
+    }
+    
+    .placeholder-emoji {
+        font-size: 2.5rem;
+    }
+    
+    .placeholder-text {
+        font-size: 1.2rem;
     }
     
     .content-wrapper {
@@ -1049,9 +1090,18 @@ body {
         font-size: 1.6rem;
     }
     
-    .her-photo {
+    .her-photo,
+    .photo-placeholder {
         width: 140px;
         height: 140px;
+    }
+    
+    .placeholder-emoji {
+        font-size: 2rem;
+    }
+    
+    .placeholder-text {
+        font-size: 1rem;
     }
     
     .message-card {
@@ -1091,9 +1141,18 @@ body {
         padding: 1rem;
     }
     
-    .her-photo {
+    .her-photo,
+    .photo-placeholder {
         width: 120px;
         height: 120px;
+    }
+    
+    .placeholder-emoji {
+        font-size: 1.8rem;
+    }
+    
+    .placeholder-text {
+        font-size: 0.9rem;
     }
     
     .main-title {

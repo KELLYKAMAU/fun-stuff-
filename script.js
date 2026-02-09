@@ -47,7 +47,40 @@ document.addEventListener('DOMContentLoaded', () => {
     initializePersonalization();
     setupEventListeners();
     setupSmoothScrolling();
+    checkImageLoad();
 });
+
+// ============================================
+// IMAGE LOAD CHECK
+// ============================================
+
+function checkImageLoad() {
+    const herPhoto = document.getElementById('herPhoto');
+    if (herPhoto) {
+        herPhoto.addEventListener('error', () => {
+            // Image failed to load, show placeholder
+            const placeholder = herPhoto.nextElementSibling;
+            if (placeholder && placeholder.classList.contains('photo-placeholder')) {
+                herPhoto.style.display = 'none';
+                placeholder.style.display = 'flex';
+            }
+        });
+        
+        // Check if image is already loaded or if src is missing
+        if (!herPhoto.complete || !herPhoto.naturalWidth) {
+            // Try to load the image
+            const img = new Image();
+            img.onerror = () => {
+                const placeholder = herPhoto.nextElementSibling;
+                if (placeholder && placeholder.classList.contains('photo-placeholder')) {
+                    herPhoto.style.display = 'none';
+                    placeholder.style.display = 'flex';
+                }
+            };
+            img.src = herPhoto.src;
+        }
+    }
+}
 
 // ============================================
 // PERSONALIZATION

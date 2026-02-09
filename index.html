@@ -42,7 +42,11 @@
             
             <div class="content-wrapper">
                 <div class="photo-container">
-                    <img src="images/reemie.jpg" alt="Reemie" class="her-photo" id="herPhoto">
+                    <img src="images/reemie.jpg" alt="Reemie" class="her-photo" id="herPhoto" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="photo-placeholder" style="display: none;">
+                        <span class="placeholder-emoji">💕</span>
+                        <span class="placeholder-text">Photo</span>
+                    </div>
                     <div class="photo-frame"></div>
                 </div>
                 <h1 class="main-title">Hello <span class="name-highlight" id="herName">Beautiful</span>! ✨</h1>
