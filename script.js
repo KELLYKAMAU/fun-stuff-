@@ -236,13 +236,13 @@ function updateLoveMeter(value) {
         
         // Change color based on value
         if (percentage >= 200) {
-            loveMeterFill.style.background = 'linear-gradient(90deg, #ff6b9d, #ff1493, #ff1744, #ff6b9d)';
+            loveMeterFill.style.background = 'linear-gradient(90deg, #c77dff, #ff6b9d, #ff1493, #9333ea, #c77dff)';
             loveMeterFill.style.backgroundSize = '200% 100%';
             loveMeterFill.style.animation = 'gradientShift 2s ease infinite';
         } else if (percentage >= 100) {
-            loveMeterFill.style.background = 'linear-gradient(90deg, #ff6b9d, #ff1493)';
+            loveMeterFill.style.background = 'linear-gradient(90deg, #c77dff, #ff6b9d, #ff1493)';
         } else {
-            loveMeterFill.style.background = 'linear-gradient(90deg, #ffb3d9, #ff6b9d)';
+            loveMeterFill.style.background = 'linear-gradient(90deg, #ffb3d9, #c77dff, #ff6b9d)';
         }
     }
     
