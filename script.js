@@ -637,69 +637,43 @@ function initializePhotoCarousel() {
     const carouselPrev = document.getElementById('carouselPrev');
     const carouselNext = document.getElementById('carouselNext');
     
-    // Re-query photos and dots in case they weren't loaded initially
-    const allPhotos = document.querySelectorAll('.carousel-photo');
-    const allDots = document.querySelectorAll('.dot');
-    
-    console.log('Carousel photos found:', allPhotos.length);
-    allPhotos.forEach((photo, i) => {
-        console.log(`Photo ${i}:`, photo.src, 'Active:', photo.classList.contains('active'));
-    });
-    
     if (carouselPrev) {
-        carouselPrev.addEventListener('click', () => {
-            const current = document.querySelectorAll('.carousel-photo');
-            let activeIndex = Array.from(current).findIndex(p => p.classList.contains('active'));
-            showSlide(activeIndex - 1);
-        });
+        carouselPrev.addEventListener('click', () => showSlide(currentSlide - 1));
     }
     
     if (carouselNext) {
-        carouselNext.addEventListener('click', () => {
-            const current = document.querySelectorAll('.carousel-photo');
-            let activeIndex = Array.from(current).findIndex(p => p.classList.contains('active'));
-            showSlide(activeIndex + 1);
-        });
+        carouselNext.addEventListener('click', () => showSlide(currentSlide + 1));
     }
     
     // Dot navigation
-    allDots.forEach((dot, index) => {
+    dots.forEach((dot, index) => {
         dot.addEventListener('click', () => showSlide(index));
     });
     
     // Auto-advance carousel
-    if (allPhotos.length > 0) {
+    if (photos.length > 0) {
         setInterval(() => {
-            const current = document.querySelectorAll('.carousel-photo');
-            let activeIndex = Array.from(current).findIndex(p => p.classList.contains('active'));
-            showSlide(activeIndex + 1);
+            showSlide(currentSlide + 1);
         }, 5000);
     }
 }
 
 function showSlide(index) {
-    const allPhotos = document.querySelectorAll('.carousel-photo');
-    const allDots = document.querySelectorAll('.dot');
+    if (photos.length === 0) return;
     
-    if (allPhotos.length === 0) {
-        console.log('No carousel photos found');
-        return;
-    }
-    
-    if (index >= allPhotos.length) {
+    if (index >= photos.length) {
         currentSlide = 0;
     } else if (index < 0) {
-        currentSlide = allPhotos.length - 1;
+        currentSlide = photos.length - 1;
     } else {
         currentSlide = index;
     }
     
-    allPhotos.forEach((photo, i) => {
+    photos.forEach((photo, i) => {
         photo.classList.toggle('active', i === currentSlide);
-        console.log(`Photo ${i} (${photo.src}):`, i === currentSlide ? 'ACTIVE' : 'hidden');
     });
     
-    allDots.forEach((dot, i) => {
+    dots.forEach((dot, i) => {
         dot.classList.toggle('active', i === currentSlide);
     });
 }
