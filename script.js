@@ -836,14 +836,39 @@ function initializeLoveCounter() {
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
         
-        daysCounter.textContent = days;
-        hoursCounter.textContent = hours.toString().padStart(2, '0');
-        minutesCounter.textContent = minutes.toString().padStart(2, '0');
+        // Update counters with smooth transitions
+        if (daysCounter.textContent !== days.toString()) {
+            daysCounter.textContent = days;
+            daysCounter.style.animation = 'numberPulse 0.5s ease';
+        }
+        
+        const hoursStr = hours.toString().padStart(2, '0');
+        if (hoursCounter.textContent !== hoursStr) {
+            hoursCounter.textContent = hoursStr;
+            hoursCounter.style.animation = 'numberPulse 0.5s ease';
+        }
+        
+        const minutesStr = minutes.toString().padStart(2, '0');
+        if (minutesCounter.textContent !== minutesStr) {
+            minutesCounter.textContent = minutesStr;
+            minutesCounter.style.animation = 'numberPulse 0.5s ease';
+        }
     }
     
+    // Update immediately
     updateCounter();
-    setInterval(updateCounter, 60000); // Update every minute
+    
+    // Update every second for live timer
+    setInterval(updateCounter, 1000);
+    
+    // Also update when page becomes visible (if user switches tabs)
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+            updateCounter();
+        }
+    });
 }
 
 // Photo gallery is now static - no carousel functionality needed
