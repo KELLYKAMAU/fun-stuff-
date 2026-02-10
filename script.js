@@ -16,7 +16,9 @@ const CONFIG = {
     // - Bensound: https://www.bensound.com/royalty-free-music/romantic
     // - YouTube Audio Library (download and host)
     // - Or upload your own MP3 to a hosting service
-    musicUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"  // Replace with your romantic music URL
+    // Romantic music by VibeHorn from Pixabay (Track ID: 431010)
+    // Get the direct MP3 download link from: https://pixabay.com/music/431010/
+    musicUrl: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_431010.mp3"  // Direct MP3 link for romantic music
 };
 
 // DOM Elements
