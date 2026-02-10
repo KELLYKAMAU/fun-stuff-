@@ -370,38 +370,28 @@ body {
    PHOTO CAROUSEL
    ============================================ */
 
-.photo-carousel {
-    position: relative;
+.photo-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     width: 100%;
     max-width: 400px;
     margin-bottom: 2rem;
     animation: fadeInUp 1s ease-out 0.3s both;
 }
 
-.carousel-container {
-    position: relative;
+.gallery-photo {
     width: 100%;
-    height: 400px;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 15px 50px var(--shadow);
-}
-
-.carousel-photo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    height: auto;
+    max-height: 400px;
     object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.6s ease;
     border-radius: 20px;
+    box-shadow: 0 15px 50px var(--shadow);
+    transition: transform 0.3s ease;
 }
 
-.carousel-photo.active {
-    opacity: 1;
-    z-index: 2;
+.gallery-photo:hover {
+    transform: scale(1.02);
 }
 
 .carousel-btn {

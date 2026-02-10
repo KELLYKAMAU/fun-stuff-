@@ -625,58 +625,7 @@ function initializeLoveCounter() {
     setInterval(updateCounter, 60000); // Update every minute
 }
 
-// ============================================
-// PHOTO CAROUSEL
-// ============================================
-
-let currentSlide = 0;
-const photos = document.querySelectorAll('.carousel-photo');
-const dots = document.querySelectorAll('.dot');
-
-function initializePhotoCarousel() {
-    const carouselPrev = document.getElementById('carouselPrev');
-    const carouselNext = document.getElementById('carouselNext');
-    
-    if (carouselPrev) {
-        carouselPrev.addEventListener('click', () => showSlide(currentSlide - 1));
-    }
-    
-    if (carouselNext) {
-        carouselNext.addEventListener('click', () => showSlide(currentSlide + 1));
-    }
-    
-    // Dot navigation
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => showSlide(index));
-    });
-    
-    // Auto-advance carousel
-    if (photos.length > 0) {
-        setInterval(() => {
-            showSlide(currentSlide + 1);
-        }, 5000);
-    }
-}
-
-function showSlide(index) {
-    if (photos.length === 0) return;
-    
-    if (index >= photos.length) {
-        currentSlide = 0;
-    } else if (index < 0) {
-        currentSlide = photos.length - 1;
-    } else {
-        currentSlide = index;
-    }
-    
-    photos.forEach((photo, i) => {
-        photo.classList.toggle('active', i === currentSlide);
-    });
-    
-    dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentSlide);
-    });
-}
+// Photo gallery is now static - no carousel functionality needed
 
 // ============================================
 // SHARE BUTTON
