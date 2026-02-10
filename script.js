@@ -8,7 +8,17 @@ const CONFIG = {
     yourName: "Kelly Kamau",     // Replace with your name
     personalMessage: "Hey wamboo ,I know ur wondering but I do know u might have a pretty good guess,it may seem odd but I do have a request?",  // Replace with your personal message
     relationshipStartDate: "2025-12-19",  // Format: YYYY-MM-DD (when you started dating/met - optional)
-    enableLoveCounter: true  // Set to false to hide love counter
+    enableLoveCounter: true,  // Set to false to hide love counter
+    // Reasons why she's special - UPDATE THESE with personal, genuine reasons
+    reasonsWhySpecial: [
+        { icon: "✨", text: "Your energy is magnetic—when you talk, I genuinely want to listen" },
+        { icon: "💫", text: "You have this way of making ordinary moments feel meaningful" },
+        { icon: "🌙", text: "Your smile—I don't know how to explain it, but it stays with me" },
+        { icon: "💭", text: "The way you think about things shows depth I really admire" },
+        { icon: "🤍", text: "You're real. No games, no pretense—just authentically you" },
+        { icon: "💕", text: "Every conversation with you feels like a gift I didn't know I needed" }
+    ],
+    closingNote: "These are just a few reasons why I'm grateful you're giving me a chance. I see something special in you, and I want to understand it better—slowly, genuinely, and with real intention."
 };
 
 // DOM Elements
@@ -40,6 +50,11 @@ const reaction2 = document.getElementById('reaction2');
 
 // Question 3 elements
 const reaction3 = document.getElementById('reaction3');
+
+// Special section elements
+const specialSection = document.getElementById('specialSection');
+const reasonsGrid = document.getElementById('reasonsGrid');
+const closingNoteText = document.getElementById('closingNoteText');
 
 // Quiz elements
 const dateQuizSection = document.getElementById('dateQuizSection');
@@ -184,6 +199,57 @@ function initializePersonalization() {
     if (personalMessageElement && CONFIG.personalMessage !== "[INSERT YOUR MESSAGE HERE]") {
         personalMessageElement.textContent = CONFIG.personalMessage;
     }
+    
+    // Initialize special reasons section
+    initializeSpecialReasons();
+    
+    // Update closing note
+    const closingNoteElement = document.getElementById('closingNoteText');
+    if (closingNoteElement && CONFIG.closingNote) {
+        closingNoteElement.textContent = CONFIG.closingNote;
+    }
+}
+
+function initializeSpecialReasons() {
+    const reasonsGridElement = document.getElementById('reasonsGrid');
+    if (!reasonsGridElement || !CONFIG.reasonsWhySpecial || CONFIG.reasonsWhySpecial.length === 0) {
+        return;
+    }
+    
+    // Clear any existing content
+    reasonsGridElement.innerHTML = '';
+    
+    // Create reason cards with staggered animations
+    CONFIG.reasonsWhySpecial.forEach((reason, index) => {
+        const reasonCard = document.createElement('div');
+        reasonCard.className = 'reason-card';
+        reasonCard.style.animationDelay = `${index * 0.15}s`;
+        
+        reasonCard.innerHTML = `
+            <div class="reason-icon">${reason.icon}</div>
+            <p class="reason-text">${reason.text}</p>
+        `;
+        
+        // Add click interaction for extra engagement
+        reasonCard.addEventListener('click', () => {
+            reasonCard.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                reasonCard.style.transform = '';
+            }, 200);
+            
+            // Small confetti on click
+            if (typeof confetti !== 'undefined') {
+                confetti({
+                    particleCount: 5,
+                    spread: 20,
+                    origin: { y: 0.5 },
+                    colors: ['#ff6b9d', '#ff1493']
+                });
+            }
+        });
+        
+        reasonsGridElement.appendChild(reasonCard);
+    });
 }
 
 // ============================================
