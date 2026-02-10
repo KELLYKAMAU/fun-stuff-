@@ -16,9 +16,12 @@ const CONFIG = {
     // - Bensound: https://www.bensound.com/royalty-free-music/romantic
     // - YouTube Audio Library (download and host)
     // - Or upload your own MP3 to a hosting service
-    // Romantic music by VibeHorn from Pixabay (Track ID: 431010)
-    // Get the direct MP3 download link from: https://pixabay.com/music/431010/
-    musicUrl: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_431010.mp3"  // Direct MP3 link for romantic music
+    // Romantic background music - Sweet and colorful tune
+    // Try these options (replace with direct MP3 links):
+    // Option 1: Upload your own MP3 to GitHub (recommended)
+    // Option 2: Use a reliable music hosting service
+    // Option 3: Use YouTube to MP3 converter and host the file
+    musicUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"  // Replace with your romantic music URL
 };
 
 // DOM Elements
@@ -70,9 +73,15 @@ document.addEventListener('DOMContentLoaded', () => {
 function setupMusic() {
     const musicSource = document.getElementById('musicSource');
     if (backgroundMusic && musicSource && CONFIG.musicUrl) {
+        // Remove old source and add new one to force reload
         musicSource.src = CONFIG.musicUrl;
-        backgroundMusic.load();
+        backgroundMusic.load(); // Reload the audio element with new source
         backgroundMusic.volume = 0.5; // Set to 50% volume for pleasant background music
+        
+        // Log for debugging
+        console.log('Music URL set to:', CONFIG.musicUrl);
+    } else {
+        console.error('Music setup failed:', { backgroundMusic, musicSource, musicUrl: CONFIG.musicUrl });
     }
 }
 
