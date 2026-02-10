@@ -6,7 +6,7 @@
 const CONFIG = {
     herName: "Reemie Wambui",           // Replace with her name
     yourName: "Kelly Kamau",     // Replace with your name
-    personalMessage: "Hey wamboo ,I know ur wondering but I do know u might have a pretty good guess,it may seem odd but I do have a request?",  // Replace with your personal message
+    personalMessage: "I don't usually do things like this, but you're worth stepping out of my comfort zone. Thank you for giving me a chance to get to know you. I'm genuinely interested in building something real with you—no games, no pressure, just honest connection. I see something special in you, and I want to explore that. Will you let me?",  // Replace with your personal message
     relationshipStartDate: "2025-12-19",  // Format: YYYY-MM-DD (when you started dating/met - optional)
     enableLoveCounter: true,  // Set to false to hide love counter
     // Reasons why she's special - UPDATE THESE with personal, genuine reasons
