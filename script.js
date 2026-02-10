@@ -41,12 +41,93 @@ const reaction2 = document.getElementById('reaction2');
 // Question 3 elements
 const reaction3 = document.getElementById('reaction3');
 
+// Quiz elements
+const dateQuizSection = document.getElementById('dateQuizSection');
+const quizQuestion = document.getElementById('quizQuestion');
+const quizOptions = document.getElementById('quizOptions');
+const quizProgressText = document.getElementById('quizProgressText');
+const quizProgressFill = document.getElementById('quizProgressFill');
+const quizResult = document.getElementById('quizResult');
+const quizResultText = document.getElementById('quizResultText');
+const quizContinueButton = document.getElementById('quizContinueButton');
+const datePlanInlineText = document.getElementById('datePlanInlineText');
+const reactionQuiz = document.getElementById('reactionQuiz');
+
+// Quiz state
+let currentQuizQuestion = 0;
+let quizAnswers = {};
+let datePlan = '';
+
+// Quiz questions
+const quizQuestions = [
+    {
+        question: "What's your ideal date vibe?",
+        options: [
+            { text: "Cozy & intimate ☕", value: "cozy" },
+            { text: "Adventure & fun 🎢", value: "adventure" },
+            { text: "Romantic & fancy 💐", value: "romantic" },
+            { text: "Casual & relaxed 😊", value: "casual" }
+        ]
+    },
+    {
+        question: "What time of day works best?",
+        options: [
+            { text: "Morning ☀️", value: "morning" },
+            { text: "Afternoon 🌤️", value: "afternoon" },
+            { text: "Evening 🌙", value: "evening" },
+            { text: "Anytime! ✨", value: "flexible" }
+        ]
+    },
+    {
+        question: "What sounds most appealing?",
+        options: [
+            { text: "Food & drinks 🍽️", value: "food" },
+            { text: "Activity or event 🎭", value: "activity" },
+            { text: "Nature & outdoors 🌳", value: "nature" },
+            { text: "Something creative 🎨", value: "creative" }
+        ]
+    }
+];
+
+// Date plan templates based on quiz answers
+const datePlans = {
+    cozy_morning_food: "A cozy morning coffee date at a quiet café, followed by brunch at a spot with great vibes. Just us, good conversation, and no rush.",
+    cozy_afternoon_food: "An afternoon at a cute restaurant or café, maybe dessert after. Low-key, comfortable, perfect for getting to know each other better.",
+    cozy_evening_food: "Dinner at a warm, intimate restaurant with great food and atmosphere. We can take our time, talk, and just enjoy each other's company.",
+    cozy_flexible_food: "A relaxed food adventure — maybe brunch, lunch, or dinner at a place you'd love. I'll pick somewhere cozy and comfortable.",
+    
+    adventure_morning_activity: "An early morning adventure — maybe hiking, exploring a new area, or trying something active together. Then we grab food after!",
+    adventure_afternoon_activity: "An afternoon of fun — could be an escape room, mini golf, arcade, or something active. Then we grab a bite and chat.",
+    adventure_evening_activity: "An evening event or activity — maybe a concert, comedy show, or something fun happening in town. Then dinner after.",
+    adventure_flexible_activity: "Something fun and active — I'll plan an adventure based on what's happening. Could be anything from exploring to trying something new!",
+    
+    romantic_morning_nature: "A morning walk in a beautiful park or garden, maybe a picnic breakfast. Peaceful, romantic, and just us.",
+    romantic_afternoon_nature: "An afternoon in nature — maybe a botanical garden, scenic spot, or beautiful park. Then we can grab something to eat.",
+    romantic_evening_nature: "A sunset walk somewhere beautiful, followed by a nice dinner. Romantic, thoughtful, and perfect for us.",
+    romantic_flexible_nature: "A romantic day in nature — I'll plan something beautiful and peaceful. Maybe a garden, park, or scenic spot you'd love.",
+    
+    casual_morning_creative: "A casual morning doing something creative together — maybe a painting class, pottery, or something fun and low-pressure.",
+    casual_afternoon_creative: "An afternoon creative activity — could be a workshop, art class, or something hands-on. Then we grab food and chat.",
+    casual_evening_creative: "An evening creative experience — maybe a cooking class, art event, or something fun. Then dinner somewhere relaxed.",
+    casual_flexible_creative: "Something creative and fun — I'll find a cool workshop or activity we can do together. Low-pressure and enjoyable.",
+    
+    // Fallback plans
+    default_cozy: "A cozy, comfortable date — maybe coffee, food, or just hanging out somewhere nice. I'll make sure it's relaxed and perfect for us.",
+    default_adventure: "Something fun and adventurous — I'll plan an activity or event we can enjoy together. It'll be memorable!",
+    default_romantic: "A romantic, thoughtful date — I'll plan something special that shows I care. Something beautiful and meaningful.",
+    default_casual: "A casual, relaxed date — nothing fancy, just us spending quality time together. I'll make sure it's comfortable and fun."
+};
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     initializePersonalization();
     setupEventListeners();
     setupSmoothScrolling();
     checkImageLoad();
+    if (CONFIG.enableLoveCounter) {
+        initializeLoveCounter();
+    }
+    initializeShareButton();
 });
 
 // ============================================
@@ -131,7 +212,14 @@ function setupEventListeners() {
     if (meterButton3) meterButton3.addEventListener('click', () => updateLoveMeter(100));
     if (meterButton4) meterButton4.addEventListener('click', () => updateLoveMeter(200));
     if (continueButton) {
-        continueButton.addEventListener('click', () => showQuestion3());
+        continueButton.addEventListener('click', () => showDateQuiz());
+    }
+    
+    // Quiz continue button
+    if (quizContinueButton) {
+        quizContinueButton.addEventListener('click', () => {
+            showQuestion3();
+        });
     }
     
     // Question 3 buttons
@@ -267,14 +355,147 @@ function updateLoveMeter(value) {
     }
 }
 
-function showQuestion3() {
+// ============================================
+// DATE QUIZ FUNCTIONALITY
+// ============================================
+
+function showDateQuiz() {
     question2Section.classList.add('hidden');
+    dateQuizSection.classList.remove('hidden');
+    dateQuizSection.style.display = 'flex';
+    dateQuizSection.style.opacity = '1';
+    dateQuizSection.style.transform = 'translateY(0)';
+    dateQuizSection.scrollIntoView({ behavior: 'smooth' });
+    
+    // Reset quiz state
+    currentQuizQuestion = 0;
+    quizAnswers = {};
+    quizResult.classList.add('hidden');
+    
+    // Show first question
+    displayQuizQuestion();
+    
+    if (reactionQuiz) {
+        reactionQuiz.style.animation = 'pulse 1s ease infinite';
+    }
+}
+
+function displayQuizQuestion() {
+    if (currentQuizQuestion >= quizQuestions.length) {
+        showQuizResult();
+        return;
+    }
+    
+    const question = quizQuestions[currentQuizQuestion];
+    
+    // Update progress
+    const progress = ((currentQuizQuestion + 1) / quizQuestions.length) * 100;
+    quizProgressFill.style.width = `${progress}%`;
+    quizProgressText.textContent = `Question ${currentQuizQuestion + 1} of ${quizQuestions.length}`;
+    
+    // Display question
+    quizQuestion.textContent = question.question;
+    
+    // Clear and display options
+    quizOptions.innerHTML = '';
+    question.options.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.className = 'quiz-option';
+        button.textContent = option.text;
+        button.addEventListener('click', () => selectQuizOption(option.value, button));
+        quizOptions.appendChild(button);
+    });
+}
+
+function selectQuizOption(value, buttonElement) {
+    // Store answer
+    const questionKeys = ['vibe', 'time', 'preference'];
+    quizAnswers[questionKeys[currentQuizQuestion]] = value;
+    
+    // Visual feedback
+    const allOptions = quizOptions.querySelectorAll('.quiz-option');
+    allOptions.forEach(opt => opt.classList.remove('selected'));
+    buttonElement.classList.add('selected');
+    
+    // Small confetti for selection
+    if (typeof confetti !== 'undefined') {
+        confetti({
+            particleCount: 10,
+            spread: 30,
+            origin: { y: 0.7 },
+            colors: ['#ff6b9d', '#ff1493']
+        });
+    }
+    
+    // Move to next question after a short delay
+    setTimeout(() => {
+        currentQuizQuestion++;
+        displayQuizQuestion();
+    }, 800);
+}
+
+function showQuizResult() {
+    // Generate date plan based on answers
+    datePlan = generateDatePlan();
+    
+    // Hide quiz question, show result
+    quizQuestion.style.display = 'none';
+    quizOptions.style.display = 'none';
+    quizResult.classList.remove('hidden');
+    quizResultText.textContent = datePlan;
+    
+    // Update progress to 100%
+    quizProgressFill.style.width = '100%';
+    quizProgressText.textContent = 'All done! ✨';
+    
+    // Confetti celebration
+    if (typeof confetti !== 'undefined') {
+        confetti({
+            particleCount: 50,
+            spread: 70,
+            origin: { y: 0.6 },
+            colors: ['#ff6b9d', '#ff1493', '#ff1744', '#ffb3d9']
+        });
+    }
+}
+
+function generateDatePlan() {
+    const vibe = quizAnswers.vibe || 'casual';
+    const time = quizAnswers.time || 'flexible';
+    const preference = quizAnswers.preference || 'food';
+    
+    // Try to find a matching plan
+    const planKey = `${vibe}_${time}_${preference}`;
+    let plan = datePlans[planKey];
+    
+    // If no exact match, try fallback
+    if (!plan) {
+        plan = datePlans[`default_${vibe}`] || datePlans.default_casual;
+    }
+    
+    return plan;
+}
+
+function showQuestion3() {
+    dateQuizSection.classList.add('hidden');
     question3Section.classList.remove('hidden');
     question3Section.style.display = 'flex';
     question3Section.style.opacity = '1';
     question3Section.style.transform = 'translateY(0)';
     question3Section.scrollIntoView({ behavior: 'smooth' });
     currentQuestion = 3;
+    
+    // Display the personalized date plan
+    if (datePlanInlineText && datePlan) {
+        datePlanInlineText.textContent = `Based on your answers: ${datePlan}`;
+        datePlanInlineText.style.display = 'block';
+        datePlanInlineText.style.marginBottom = '2rem';
+        datePlanInlineText.style.fontSize = 'clamp(1rem, 2vw, 1.2rem)';
+        datePlanInlineText.style.color = 'rgba(255, 255, 255, 0.95)';
+        datePlanInlineText.style.fontStyle = 'italic';
+        datePlanInlineText.style.lineHeight = '1.6';
+    }
+    
     if (reaction3) {
         reaction3.style.animation = 'pulse 1s ease infinite';
     }

@@ -878,6 +878,197 @@ body {
 }
 
 /* ============================================
+   QUIZ SECTION
+   ============================================ */
+
+.quiz-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background: linear-gradient(180deg, #ffccdd 0%, #ff99bb 30%, #ff6b9d 60%, #ff3366 100%);
+}
+
+.quiz-section.hidden {
+    display: none;
+}
+
+.quiz-wrapper {
+    text-align: center;
+    max-width: 700px;
+    width: 100%;
+    animation: fadeIn 1s ease-out;
+}
+
+.quiz-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.quiz-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    padding: 3rem;
+    box-shadow: 0 15px 50px var(--shadow);
+    border: 3px solid rgba(255, 107, 157, 0.3);
+    animation: slideInUp 0.8s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.quiz-progress {
+    margin-bottom: 2rem;
+}
+
+.quiz-progress-text {
+    font-size: 0.9rem;
+    color: var(--deep-pink);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.quiz-progress-bar {
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, #ffccdd, #ff99bb);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--red-pink), var(--primary-pink), var(--deep-pink));
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    box-shadow: 0 0 10px rgba(255, 107, 157, 0.5);
+}
+
+.quiz-question {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    color: var(--rose-red);
+    margin-bottom: 2rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.quiz-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.quiz-option {
+    padding: 1.2rem 1.5rem;
+    background: linear-gradient(135deg, var(--light-red-pink), var(--red-pink), var(--primary-pink));
+    color: var(--white);
+    border: none;
+    border-radius: 20px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--shadow);
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.quiz-option:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 25px var(--shadow);
+}
+
+.quiz-option:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.quiz-option.selected {
+    background: linear-gradient(135deg, var(--deep-pink), var(--rose-red));
+    box-shadow: 0 0 20px rgba(255, 20, 147, 0.6);
+    transform: scale(1.05);
+}
+
+.quiz-result {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(255, 20, 147, 0.1));
+    border-radius: 20px;
+    border: 2px dashed var(--deep-pink);
+    margin-top: 2rem;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.quiz-result-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.8rem, 4vw, 2.3rem);
+    color: var(--deep-pink);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.quiz-result-text {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: #555;
+    line-height: 1.8;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .quiz-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .quiz-options {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .quiz-option {
+        padding: 1rem 1.2rem;
+        font-size: 1rem;
+    }
+    
+    .quiz-question {
+        font-size: clamp(1.8rem, 5vw, 2.2rem);
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .quiz-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .quiz-option {
+        padding: 0.9rem 1rem;
+        font-size: 0.95rem;
+    }
+    
+    .quiz-result {
+        padding: 1.5rem;
+    }
+}
+
+/* ============================================
    SUCCESS SCREEN
    ============================================ */
 

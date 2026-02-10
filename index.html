@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#ff6b9d">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Will You Be My Valentine? 💕</title>
+    <title>Thank You for the Chance 💛</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,27 +37,27 @@
             
             <div class="content-wrapper">
                 <div class="photo-container">
-                    <img src="images/reemie.jpg" alt="Reemie" class="her-photo" id="herPhoto" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="photo-placeholder" style="display: none;">
+                    <img src="images/reemie.jpg" alt="Her photo" class="her-photo" id="herPhoto">
+                    <div class="photo-placeholder hidden" id="photoPlaceholder">
                         <span class="placeholder-emoji">💕</span>
                         <span class="placeholder-text">Photo</span>
                     </div>
                     <div class="photo-frame"></div>
                 </div>
                 <h1 class="main-title">Hello <span class="name-highlight" id="herName">Beautiful</span>! ✨</h1>
-                <p class="subtitle">I have something special to ask you...</p>
+                <p class="subtitle">Thank you for giving me a chance to get to know you.</p>
             </div>
             
             <button class="scroll-button" id="scrollButton">
-                <span>💌</span>
-                <span>Scroll to see more</span>
+                <span>💛</span>
+                <span>Scroll — I wrote this for you</span>
             </button>
         </section>
 
         <!-- Love Counter Section -->
         <section class="love-counter-section hidden" id="loveCounterSection">
             <div class="love-counter-card">
-                <h2 class="counter-title">Our Time Together 💕</h2>
+                <h2 class="counter-title">Time Since We Started This 💛</h2>
                 <div class="counter-display" id="loveCounter">
                     <div class="counter-item">
                         <span class="counter-number" id="daysCounter">0</span>
@@ -74,7 +74,7 @@
                         <span class="counter-label">Minutes</span>
                     </div>
                 </div>
-                <p class="counter-message">Every moment with you is special ✨</p>
+                <p class="counter-message">I’m grateful for every conversation ✨</p>
             </div>
         </section>
 
@@ -88,8 +88,8 @@
                 </div>
                 <div class="message-card">
                     <div class="card-header">
-                        <span class="envelope-icon">💌</span>
-                        <h2>A Special Message</h2>
+                        <span class="envelope-icon">📝</span>
+                        <h2>A Small Thank You</h2>
                     </div>
                     <div class="card-body">
                         <p class="personal-message" id="personalMessage">
@@ -101,53 +101,81 @@
             </div>
         </section>
 
-        <!-- Question 1: Do you like me? -->
+        <!-- Question 1: Getting to know each other -->
         <section class="question-section" id="question1Section">
             <div class="question-wrapper">
                 <div class="reaction-emoji" id="reaction1">😊</div>
-                <h2 class="question-title">Do you like me?</h2>
+                <h2 class="question-title">Can we keep getting to know each other?</h2>
                 <div class="buttons-container">
                     <button class="btn btn-yes" id="yesButton1">
                         <span>Yes</span>
-                        <span class="emoji">😍</span>
+                        <span class="emoji">🤍</span>
                     </button>
                     <button class="btn btn-no" id="noButton1">
                         <span>No</span>
                         <span class="emoji">😢</span>
                     </button>
                 </div>
-                <p class="secret-answer hidden" id="secretAnswer1">I knew it! 💕</p>
+                <p class="secret-answer hidden" id="secretAnswer1">Thank you. I’ll do this the right way. 💛</p>
             </div>
         </section>
 
-        <!-- Question 2: How much do you love me? -->
+        <!-- Question 2: Excitement meter -->
         <section class="question-section hidden" id="question2Section">
             <div class="question-wrapper">
-                <div class="reaction-emoji" id="reaction2">💖</div>
-                <h2 class="question-title">How much do you love me?</h2>
+                <div class="reaction-emoji" id="reaction2">✨</div>
+                <h2 class="question-title">How excited are you for this journey?</h2>
                 <div class="love-meter-container">
                     <div class="love-meter">
                         <div class="love-meter-fill" id="loveMeterFill"></div>
                         <div class="love-meter-text" id="loveMeterText">0%</div>
                     </div>
                     <div class="meter-buttons">
-                        <button class="btn btn-meter" id="meterButton1">A little 💕</button>
-                        <button class="btn btn-meter" id="meterButton2">A lot 💖</button>
-                        <button class="btn btn-meter" id="meterButton3">So much! 💗</button>
-                        <button class="btn btn-meter" id="meterButton4">Infinity! ♾️</button>
+                        <button class="btn btn-meter" id="meterButton1">A little 🙂</button>
+                        <button class="btn btn-meter" id="meterButton2">Pretty excited ✨</button>
+                        <button class="btn btn-meter" id="meterButton3">Very excited 🤍</button>
+                        <button class="btn btn-meter" id="meterButton4">Okay wow 😭💛</button>
                     </div>
                 </div>
                 <button class="btn btn-continue hidden" id="continueButton">
-                    Continue to the final question →
+                    Continue to a quick date quiz →
                 </button>
             </div>
         </section>
 
-        <!-- Question 3: Will you be my Valentine? -->
+        <!-- Date Quiz -->
+        <section class="quiz-section hidden" id="dateQuizSection">
+            <div class="quiz-wrapper">
+                <div class="reaction-emoji" id="reactionQuiz">🧸</div>
+                <h2 class="question-title">Quick Date Quiz</h2>
+                <p class="quiz-subtitle">Pick what feels right — I’ll plan it 😊</p>
+
+                <div class="quiz-card" id="quizCard">
+                    <div class="quiz-progress">
+                        <span id="quizProgressText">Question 1 of 3</span>
+                        <div class="quiz-progress-bar">
+                            <div class="quiz-progress-fill" id="quizProgressFill"></div>
+                        </div>
+                    </div>
+
+                    <h3 class="quiz-question" id="quizQuestion">Loading…</h3>
+                    <div class="quiz-options" id="quizOptions"></div>
+
+                    <div class="quiz-result hidden" id="quizResult">
+                        <p class="quiz-result-title">Our first date idea:</p>
+                        <p class="quiz-result-text" id="quizResultText"></p>
+                        <button class="btn btn-continue" id="quizContinueButton">Okay… ask me 🤍</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question 3: Ask her out on a date -->
         <section class="question-section hidden" id="question3Section">
             <div class="question-wrapper">
                 <div class="reaction-emoji" id="reaction3">💝</div>
-                <h2 class="question-title">Will you be my Valentine?</h2>
+                <h2 class="question-title">Would you go on a date with me?</h2>
+                <p class="quiz-subtitle" id="datePlanInlineText"></p>
                 <div class="buttons-container">
                     <button class="btn btn-yes" id="yesButton">
                         <span>Yes</span>
@@ -158,7 +186,7 @@
                         <span class="emoji">🙈</span>
                     </button>
                 </div>
-                <p class="hint-text" id="hintText">💡 Hint: The "Yes" button is the right choice!</p>
+                <p class="hint-text" id="hintText">💡 If you say yes, I’ll handle the details — gently and respectfully.</p>
             </div>
         </section>
     </div>
@@ -176,38 +204,38 @@
             </div>
             
             <!-- Main Title -->
-            <h1 class="success-title">You Said Yes! 🎉</h1>
-            <p class="success-subtitle">This means everything to me</p>
+            <h1 class="success-title">Thank You 🤍</h1>
+            <p class="success-subtitle">I won’t take this for granted</p>
             
             <!-- Main Message Card -->
             <div class="success-card">
                 <div class="success-card-content">
                     <p class="success-message-main">
-                        I'm genuinely excited to spend Valentine's Day with you, Reemie. 
-                        This isn't just about one day—it's about showing you how much you mean to me.
+                        I’m genuinely excited to get to know you more, <span id="successHerName">Reemie</span>.
+                        I’m interested in building something solid with you — slowly, respectfully, and with real intention.
                     </p>
                 </div>
             </div>
             
             <!-- Promise Section -->
             <div class="promises-section">
-                <h2 class="promises-title">Here's What I Promise You:</h2>
+                <h2 class="promises-title">Here’s What I Promise You:</h2>
                 <div class="promises-grid">
                     <div class="promise-item">
-                        <div class="promise-icon">💝</div>
-                        <p class="promise-text">A day filled with laughter, joy, and unforgettable moments</p>
+                        <div class="promise-icon">🤍</div>
+                        <p class="promise-text">Clear intentions — no games, no pressure</p>
                     </div>
                     <div class="promise-item">
                         <div class="promise-icon">🌹</div>
-                        <p class="promise-text">My full attention and presence—you'll have all of me</p>
+                        <p class="promise-text">Consistency, effort, and real communication</p>
                     </div>
                     <div class="promise-item">
                         <div class="promise-icon">✨</div>
-                        <p class="promise-text">To make you feel special, appreciated, and truly seen</p>
+                        <p class="promise-text">To learn you — your likes, your boundaries, your world</p>
                     </div>
                     <div class="promise-item">
                         <div class="promise-icon">💪</div>
-                        <p class="promise-text">To be the man you deserve—reliable, caring, and committed</p>
+                        <p class="promise-text">To show up like a man who’s serious about you</p>
                     </div>
                 </div>
             </div>
@@ -215,10 +243,10 @@
             <!-- Closing Message -->
             <div class="closing-message">
                 <p class="closing-text">
-                    <strong>Let's make this Valentine's Day the start of something beautiful.</strong>
+                    <strong>Let’s take this one step at a time — and do it right.</strong>
                 </p>
                 <p class="closing-text-sub">
-                    I can't wait to create memories with you that we'll cherish forever. 💕
+                    I’m excited for the journey… and I’m grateful you said yes. 💛
                 </p>
                 <p class="signature-success">— Kelly Kamau</p>
             </div>
