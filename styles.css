@@ -1175,110 +1175,6 @@ body {
 }
 
 /* ============================================
-   MUSIC TOGGLE BUTTON & VISUALIZER
-   ============================================ */
-
-.music-toggle {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--purple-accent), var(--primary-pink), var(--deep-pink));
-    border: 3px solid var(--white);
-    color: var(--white);
-    font-size: 1.8rem;
-    cursor: pointer;
-    box-shadow: 0 6px 25px rgba(199, 125, 255, 0.4), 0 0 0 4px rgba(199, 125, 255, 0.2);
-    transition: all 0.3s ease;
-    z-index: 100;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: musicButtonPulse 2s ease-in-out infinite;
-}
-
-.music-toggle:hover {
-    transform: scale(1.15) rotate(5deg);
-    box-shadow: 0 8px 30px rgba(199, 125, 255, 0.6), 0 0 0 6px rgba(199, 125, 255, 0.3);
-}
-
-.music-toggle.muted {
-    opacity: 0.6;
-    animation: none;
-}
-
-.music-toggle.playing {
-    animation: musicButtonPulse 1s ease-in-out infinite;
-    box-shadow: 0 6px 25px rgba(199, 125, 255, 0.6), 0 0 20px rgba(255, 107, 157, 0.4);
-}
-
-@keyframes musicButtonPulse {
-    0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 6px 25px rgba(199, 125, 255, 0.4), 0 0 0 4px rgba(199, 125, 255, 0.2);
-    }
-    50% {
-        transform: scale(1.05);
-        box-shadow: 0 8px 30px rgba(199, 125, 255, 0.6), 0 0 0 6px rgba(199, 125, 255, 0.3);
-    }
-}
-
-/* Music Visualizer */
-.music-visualizer {
-    position: fixed;
-    bottom: 2rem;
-    right: 9rem;
-    display: flex;
-    align-items: flex-end;
-    gap: 4px;
-    height: 50px;
-    z-index: 99;
-    opacity: 0;
-    transform: translateX(20px);
-    transition: all 0.5s ease;
-    pointer-events: none;
-}
-
-.music-visualizer.active {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.music-bar {
-    width: 6px;
-    background: linear-gradient(180deg, var(--purple-accent), var(--primary-pink), var(--deep-pink));
-    border-radius: 3px;
-    animation: musicWave 1.5s ease-in-out infinite;
-    box-shadow: 0 0 10px rgba(199, 125, 255, 0.5);
-}
-
-.music-bar-1 { height: 20%; animation-delay: 0s; }
-.music-bar-2 { height: 60%; animation-delay: 0.1s; }
-.music-bar-3 { height: 100%; animation-delay: 0.2s; }
-.music-bar-4 { height: 80%; animation-delay: 0.3s; }
-.music-bar-5 { height: 40%; animation-delay: 0.4s; }
-.music-bar-6 { height: 70%; animation-delay: 0.5s; }
-.music-bar-7 { height: 90%; animation-delay: 0.6s; }
-.music-bar-8 { height: 50%; animation-delay: 0.7s; }
-
-@keyframes musicWave {
-    0%, 100% {
-        transform: scaleY(0.3);
-        opacity: 0.6;
-    }
-    50% {
-        transform: scaleY(1);
-        opacity: 1;
-    }
-}
-
-.music-visualizer.active .music-bar {
-    animation: musicWave 1.2s ease-in-out infinite;
-}
-
-/* ============================================
    SHARE BUTTON
    ============================================ */
 
@@ -1370,24 +1266,6 @@ body {
     .personal-message {
         font-size: 1rem;
         line-height: 1.7;
-    }
-    
-    .music-toggle {
-        width: 60px;
-        height: 60px;
-        bottom: 1rem;
-        right: 1rem;
-        font-size: 1.5rem;
-    }
-    
-    .music-visualizer {
-        bottom: 1rem;
-        right: 5rem;
-        height: 40px;
-    }
-    
-    .music-bar {
-        width: 5px;
     }
     
     .meter-buttons {
@@ -1731,26 +1609,6 @@ body {
         font-size: 1rem;
         margin-top: 1.5rem;
     }
-    
-    .music-toggle {
-        width: 55px;
-        height: 55px;
-        bottom: 0.8rem;
-        right: 0.8rem;
-        font-size: 1.3rem;
-    }
-    
-    .music-visualizer {
-        bottom: 0.8rem;
-        right: 4.5rem;
-        height: 35px;
-        gap: 3px;
-    }
-    
-    .music-bar {
-        width: 4px;
-    }
-    
     .scroll-button {
         padding: 0.8rem 1.5rem;
         font-size: 0.95rem;
@@ -1896,11 +1754,6 @@ body {
         min-height: 56px;
     }
     
-    .music-toggle {
-        min-width: 48px;
-        min-height: 48px;
-    }
-    
     /* Remove hover effects on touch devices */
     .btn:hover {
         transform: none;
@@ -1922,7 +1775,6 @@ body {
 /* Print Styles */
 @media print {
     .hearts-background,
-    .music-toggle,
     .scroll-button {
         display: none;
     }

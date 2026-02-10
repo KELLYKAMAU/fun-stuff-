@@ -8,20 +8,7 @@ const CONFIG = {
     yourName: "Kelly Kamau",     // Replace with your name
     personalMessage: "Hey wamboo ,I know ur wondering but I do know u might have a pretty good guess,it may seem odd but I do have a request?",  // Replace with your personal message
     relationshipStartDate: "2024-01-01",  // Format: YYYY-MM-DD (when you started dating/met - optional)
-    enableLoveCounter: true,  // Set to false to hide love counter
-    // Romantic background music - Sweet and colorful tune
-    // Beautiful romantic music - Replace with your own sweet & romantic tune!
-    // Recommended sources for free romantic music:
-    // - Pixabay Music: https://pixabay.com/music/search/romantic/
-    // - Bensound: https://www.bensound.com/royalty-free-music/romantic
-    // - YouTube Audio Library (download and host)
-    // - Or upload your own MP3 to a hosting service
-    // Romantic background music - Sweet and colorful tune
-    // Try these options (replace with direct MP3 links):
-    // Option 1: Upload your own MP3 to GitHub (recommended)
-    // Option 2: Use a reliable music hosting service
-    // Option 3: Use YouTube to MP3 converter and host the file
-    musicUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"  // Replace with your romantic music URL
+    enableLoveCounter: true  // Set to false to hide love counter
 };
 
 // DOM Elements
@@ -33,9 +20,6 @@ const messageSection = document.getElementById('messageSection');
 const question1Section = document.getElementById('question1Section');
 const question2Section = document.getElementById('question2Section');
 const question3Section = document.getElementById('question3Section');
-const musicToggle = document.getElementById('musicToggle');
-const backgroundMusic = document.getElementById('backgroundMusic');
-const musicIcon = document.getElementById('musicIcon');
 const hintText = document.getElementById('hintText');
 
 // Question 1 elements
@@ -63,27 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     setupSmoothScrolling();
     checkImageLoad();
-    setupMusic();
 });
-
-// ============================================
-// MUSIC SETUP
-// ============================================
-
-function setupMusic() {
-    const musicSource = document.getElementById('musicSource');
-    if (backgroundMusic && musicSource && CONFIG.musicUrl) {
-        // Remove old source and add new one to force reload
-        musicSource.src = CONFIG.musicUrl;
-        backgroundMusic.load(); // Reload the audio element with new source
-        backgroundMusic.volume = 0.5; // Set to 50% volume for pleasant background music
-        
-        // Log for debugging
-        console.log('Music URL set to:', CONFIG.musicUrl);
-    } else {
-        console.error('Music setup failed:', { backgroundMusic, musicSource, musicUrl: CONFIG.musicUrl });
-    }
-}
 
 // ============================================
 // IMAGE LOAD CHECK
@@ -179,11 +143,6 @@ function setupEventListeners() {
     if (noButton) {
         noButton.addEventListener('mouseenter', handleNoHover);
         noButton.addEventListener('click', handleNoClick);
-    }
-    
-    // Music toggle
-    if (musicToggle) {
-        musicToggle.addEventListener('click', toggleMusic);
     }
     
     // Keyboard support
@@ -341,11 +300,6 @@ function handleYesClick() {
         
         // Play success sound (optional - you can add a sound file)
         playSuccessSound();
-    }
-    
-    // Stop background music
-    if (backgroundMusic) {
-        backgroundMusic.pause();
     }
 }
 
@@ -542,74 +496,6 @@ function playSuccessSound() {
 }
 
 // ============================================
-// MUSIC TOGGLE
-// ============================================
-
-let isMusicPlaying = false;
-const musicVisualizer = document.getElementById('musicVisualizer');
-
-function toggleMusic() {
-    if (!backgroundMusic) return;
-    
-    if (isMusicPlaying) {
-        backgroundMusic.pause();
-        musicIcon.textContent = '🔇';
-        musicToggle.classList.add('muted');
-        musicToggle.classList.remove('playing');
-        if (musicVisualizer) {
-            musicVisualizer.classList.remove('active');
-        }
-        isMusicPlaying = false;
-    } else {
-        // Try to play music (may require user interaction first)
-        const playPromise = backgroundMusic.play();
-        
-        if (playPromise !== undefined) {
-            playPromise
-                .then(() => {
-                    musicIcon.textContent = '🎵';
-                    musicToggle.classList.remove('muted');
-                    musicToggle.classList.add('playing');
-                    if (musicVisualizer) {
-                        musicVisualizer.classList.add('active');
-                    }
-                    isMusicPlaying = true;
-                })
-                .catch(() => {
-                    // Autoplay was prevented - user needs to interact first
-                    musicIcon.textContent = '🔇';
-                    musicToggle.classList.add('muted');
-                    if (musicVisualizer) {
-                        musicVisualizer.classList.remove('active');
-                    }
-                    console.log('Music autoplay prevented. User interaction required.');
-                });
-        }
-    }
-}
-
-// Update visualizer when music plays/pauses
-if (backgroundMusic) {
-    backgroundMusic.addEventListener('play', () => {
-        if (musicVisualizer) {
-            musicVisualizer.classList.add('active');
-        }
-        if (musicToggle) {
-            musicToggle.classList.add('playing');
-        }
-    });
-    
-    backgroundMusic.addEventListener('pause', () => {
-        if (musicVisualizer) {
-            musicVisualizer.classList.remove('active');
-        }
-        if (musicToggle) {
-            musicToggle.classList.remove('playing');
-        }
-    });
-}
-
-// ============================================
 // SMOOTH SCROLLING
 // ============================================
 
@@ -694,16 +580,10 @@ if (!document.getElementById('fadeOutStyle')) {
 //     e.preventDefault();
 // });
 
-// Add page visibility handling
-document.addEventListener('visibilitychange', () => {
-    if (document.hidden && backgroundMusic && isMusicPlaying) {
-        backgroundMusic.pause();
-    } else if (!document.hidden && backgroundMusic && isMusicPlaying) {
-        backgroundMusic.play().catch(() => {
-            // Autoplay prevented
-        });
-    }
-});
+// Add page visibility handling (if needed for other features)
+// document.addEventListener('visibilitychange', () => {
+//     // Handle page visibility changes
+// });
 
 // ============================================
 // LOVE COUNTER
