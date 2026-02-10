@@ -995,6 +995,32 @@ body {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
+/* Success Image */
+.success-image-container {
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+.success-image {
+    max-width: 100%;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 0 4px rgba(255, 255, 255, 0.2);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.success-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5), 0 0 0 6px rgba(255, 255, 255, 0.3);
+}
+
 @keyframes cardSlideIn {
     from {
         opacity: 0;
@@ -1323,6 +1349,11 @@ body {
     
     .success-card {
         padding: 1.5rem;
+    }
+    
+    .success-image {
+        max-width: 100%;
+        border-radius: 15px;
     }
     
     .success-message-main {
